@@ -15,8 +15,7 @@ import java.util.stream.IntStream;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
@@ -58,6 +57,7 @@ public class UserControllerTest {
 				.content("{\"name\": \"user\",\"age\": 18}")
 				.contentType(APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(header().exists("Location"))
 				.andExpect(status().isCreated());
 	}
 	
